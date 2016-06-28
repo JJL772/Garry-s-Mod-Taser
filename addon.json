@@ -1,0 +1,11 @@
+{
+	"title"		:	"Simple Taser SWEP",
+	"type"		:	"weapon",
+	"tags"		:	[ "roleplay", "fun" ],
+	"ignore"	:
+	[
+		"*.psd",
+		"*.vcproj",
+		"*.svn*"
+	]
+}
