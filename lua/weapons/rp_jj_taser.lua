@@ -38,6 +38,7 @@ CreateConVar("sv_taser_distance", "256", 0, "The effective distance the taser ca
 CreateConVar("sv_taser_firerate", "5", 0, "How long the player has to wait until the taser can be used again. Default: 5 seconds")
 CreateConVar("cl_taser_sparksize", "2", FCVAR_CLIENTDLL, "How large the sparks produced by the taser are. Default: 2")
 CreateConVar("sv_taser_screen_fade", "1", FCVAR_REPLICATED, "Determines if the screen will fade when a player gets tased. Default: true")
+CreateConVar("sv_taser_dropweapon", "1", FCVAR_REPLICATED, "Determines if a player will drop their weapon. Default: 1")
 
 /* Gets the convars */
 local duration = GetConVar("sv_taser_duration"):GetInt()
@@ -46,6 +47,7 @@ local tased = false
 local taser_distance = GetConVar("sv_taser_distance"):GetInt()
 local taser_firerate = GetConVar("sv_taser_firerate"):GetInt()
 local screenfade = GetConVar("sv_taser_screen_fade"):GetBool()
+local drop_weapon = GetConVar("sv_taser_dropweapon"):GetBool()
 
 function SWEP:PrimaryAttack()
     if CLIENT then
@@ -133,7 +135,9 @@ function SWEP:PrimaryAttack()
         ent:TakeDamage(dmg, self.Owner, self)
 
         /* In reality, you'd drop your weapon when you get tased */
-        ent:DropWeapon(ent:GetActiveWeapon())
+        if(dropweapon) then
+            ent:DropWeapon(ent:GetActiveWeapon())
+        end
 
         /* This will ensure the player can't shoot their weapon when they're tased */
         weapon:SetNextPrimaryFire(CurTime() + duration)
