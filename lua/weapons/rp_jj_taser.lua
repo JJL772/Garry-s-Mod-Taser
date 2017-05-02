@@ -47,7 +47,7 @@ local tased = false
 local taser_distance = GetConVar("sv_taser_distance"):GetInt()
 local taser_firerate = GetConVar("sv_taser_firerate"):GetInt()
 local screenfade = GetConVar("sv_taser_screen_fade"):GetBool()
-local drop_weapon = GetConVar("sv_taser_dropweapon"):GetBool()
+local dropweapon = GetConVar("sv_taser_dropweapon"):GetBool()
 
 function SWEP:PrimaryAttack()
     if CLIENT then
